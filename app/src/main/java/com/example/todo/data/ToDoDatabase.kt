@@ -10,5 +10,4 @@ import com.example.todo.data.models.ToDoData
 abstract class ToDoDatabase : RoomDatabase() {
 
     abstract fun toDoDao(): ToDoDao
-
 }
