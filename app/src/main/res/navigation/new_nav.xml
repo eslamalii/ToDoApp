@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/new_nav"
     app:startDestination="@id/listFragment">
 
     <fragment
@@ -45,6 +44,9 @@
             android:id="@+id/action_updateFragment_to_listFragment"
             app:destination="@id/listFragment"
             app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_right" />
+            app:exitAnim="@anim/to_left" />
+        <argument
+            android:name="currentItem"
+            app:argType="com.example.todo.data.models.ToDoData" />
     </fragment>
 </navigation>

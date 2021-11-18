@@ -5,13 +5,15 @@
       <map>
         <entry key="app/src/main/res/drawable/custom_input.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/ic_no_data.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/item_background.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.22666666666666666" />
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_update.xml" value="0.24547101449275363" />
+        <entry key="app/src/main/res/layout/row_layout.xml" value="0.4012605042016807" />
         <entry key="app/src/main/res/menu-v26/list_fragment_menu.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/menu/add_fragment_menu.xml" value="0.28229166666666666" />
-        <entry key="app/src/main/res/menu/list_fragment_menu.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/list_fragment_menu.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/menu/update_fragment_menu.xml" value="0.28229166666666666" />
       </map>
     </option>

@@ -1,15 +1,14 @@
 package com.example.todo.fragments.add
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.todo.R
-import com.example.todo.data.models.Priority
 import com.example.todo.data.models.ToDoData
+import com.example.todo.data.viewmodel.SharedViewModel
 import com.example.todo.data.viewmodel.ToDoViewModel
 import com.example.todo.databinding.FragmentAddBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AddFragment : Fragment() {
 
     private val viewModel: ToDoViewModel by viewModels()
+    private val mSharedViewModel: SharedViewModel by viewModels()
 
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
@@ -30,6 +30,8 @@ class AddFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        binding.spinnerPriorities.onItemSelectedListener = mSharedViewModel.listener
 
         //Set Menu
         setHasOptionsMenu(true)
@@ -53,13 +55,13 @@ class AddFragment : Fragment() {
         val priority = binding.spinnerPriorities.selectedItem.toString()
         val description = binding.descriptionEt.text.toString()
 
-        val validation = verifyDataFromUser(title, description)
+        val validation = mSharedViewModel.verifyDataFromUser(title, description)
         if (validation) {
             val data = ToDoData(
                 0,
                 title,
                 description,
-                parsePriority(priority)
+                mSharedViewModel.parsePriority(priority)
             )
             viewModel.insertData(data)
             Toast.makeText(requireContext(), "Successfully Added!", Toast.LENGTH_SHORT).show()
@@ -70,21 +72,6 @@ class AddFragment : Fragment() {
                 .show()
 
 
-    }
-
-    private fun verifyDataFromUser(title: String, description: String): Boolean {
-        return if (TextUtils.isEmpty(title) || TextUtils.isEmpty(description)) {
-            false
-        } else !(title.isEmpty() || description.isEmpty())
-    }
-
-    private fun parsePriority(priority: String): Priority {
-        return when (priority) {
-            "High Priority" -> Priority.HIGH
-            "Medium Priority" -> Priority.MEDIUM
-            "Low Priority" -> Priority.LOW
-            else -> Priority.LOW
-        }
     }
 
 
