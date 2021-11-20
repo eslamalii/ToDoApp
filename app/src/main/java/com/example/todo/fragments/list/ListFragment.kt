@@ -1,5 +1,6 @@
 package com.example.todo.fragments.list
 
+import ObserveOnce
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -7,7 +8,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -62,7 +62,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun setRecyclerView() {
         val recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = StaggeredGridLayoutManager( 2,StaggeredGridLayoutManager.VERTICAL)
+        recyclerView.layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         //Swipe to delete
         swipeToDelete(recyclerView)
@@ -106,8 +107,12 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_delete_all -> confirmRemoval()
-            R.id.menu_high -> viewModel.sortByHigh.observe(this, { adapter.setData(it) })
-            R.id.menu_low -> viewModel.sortByLow.observe(this, { adapter.setData(it) })
+            R.id.menu_high -> viewModel.sortByHigh.observe(
+                viewLifecycleOwner,
+                { adapter.setData(it) })
+            R.id.menu_low -> viewModel.sortByLow.observe(
+                viewLifecycleOwner,
+                { adapter.setData(it) })
         }
         return super.onOptionsItemSelected(item)
     }
@@ -129,7 +134,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun searchThoughDatabase(query: String) {
         val search = "%$query%"
 
-        viewModel.searchDatabase(search).observe(this, { list ->
+        viewModel.searchDatabase(search).ObserveOnce(viewLifecycleOwner, { list ->
             list?.let { adapter.setData(list) }
         })
     }
