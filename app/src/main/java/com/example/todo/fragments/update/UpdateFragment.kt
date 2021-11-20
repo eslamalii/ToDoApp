@@ -10,9 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.todo.R
 import com.example.todo.data.models.ToDoData
-import com.example.todo.data.viewmodel.SharedViewModel
 import com.example.todo.data.viewmodel.ToDoViewModel
 import com.example.todo.databinding.FragmentUpdateBinding
+import com.example.todo.fragments.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,7 +41,7 @@ class UpdateFragment : Fragment() {
 
         //Set Menu
         setHasOptionsMenu(true)
-        // Inflate the layout for this fragment
+
         return view
     }
 
@@ -72,7 +72,7 @@ class UpdateFragment : Fragment() {
                 mSharedViewModel.parsePriority(getPriority)
             )
             viewModel.updateData(updatedData)
-            Toast.makeText(requireContext(), "Successful Added!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Successful updated!", Toast.LENGTH_SHORT).show()
             //Navigate Back
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
         } else {
@@ -98,6 +98,11 @@ class UpdateFragment : Fragment() {
         builder.setMessage("Are you sure you want to remove '${args.currentItem.title}'?")
         builder.create().show()
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

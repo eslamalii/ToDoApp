@@ -16,7 +16,8 @@ class ToDoViewModel @Inject constructor(
 ) : ViewModel() {
 
     val getAllData: LiveData<List<ToDoData>> = repository.getAllData
-
+    val sortByHigh: LiveData<List<ToDoData>> = repository.sortByHigh()
+    val sortByLow: LiveData<List<ToDoData>> = repository.sortByLow()
     fun insertData(toDoData: ToDoData) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertData(toDoData)
@@ -36,4 +37,8 @@ class ToDoViewModel @Inject constructor(
     }
 
     fun deleteAll() = viewModelScope.launch(Dispatchers.IO) { repository.deleteAll() }
+
+    fun searchDatabase(search: String): LiveData<List<ToDoData>> {
+        return repository.searchDatabase(search)
+    }
 }

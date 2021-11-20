@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
+        android:id="@+id/menu_search"
         android:icon="@drawable/ic_search"
         android:iconTint="@color/white"
         android:title="@string/search"
@@ -14,8 +15,8 @@
     <group android:checkableBehavior="single">
         <item android:title="@string/sort_by">
             <menu>
-                <item android:title="@string/priority_high" />
-                <item android:title="@string/priority_low" />
+                <item android:title="@string/priority_high"  android:id="@+id/menu_high"/>
+                <item android:title="@string/priority_low" android:id="@+id/menu_low"/>
             </menu>
         </item>
     </group>

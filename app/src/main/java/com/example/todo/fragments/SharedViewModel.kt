@@ -1,4 +1,4 @@
-package com.example.todo.data.viewmodel
+package com.example.todo.fragments
 
 import android.app.Application
 import android.text.TextUtils
@@ -15,7 +15,7 @@ import com.example.todo.data.models.ToDoData
 
 class SharedViewModel(application: Application) : AndroidViewModel(application) {
 
-    var emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(true)
+    var emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun checkDatabaseEmpty(data: List<ToDoData>) {
         emptyDatabase.value = data.isEmpty()

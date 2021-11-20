@@ -24,4 +24,11 @@ class ToDoRepository @Inject constructor(private val toDoDao: ToDoDao) {
     suspend fun deleteAll() {
         toDoDao.deleteAll()
     }
+
+    fun searchDatabase(search: String): LiveData<List<ToDoData>> {
+        return toDoDao.searchDatabase(search)
+    }
+
+    fun sortByHigh(): LiveData<List<ToDoData>> = toDoDao.sortByHighPriority()
+    fun sortByLow(): LiveData<List<ToDoData>> = toDoDao.sortByLowPriority()
 }

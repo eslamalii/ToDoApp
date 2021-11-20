@@ -8,9 +8,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.todo.R
 import com.example.todo.data.models.ToDoData
-import com.example.todo.data.viewmodel.SharedViewModel
 import com.example.todo.data.viewmodel.ToDoViewModel
 import com.example.todo.databinding.FragmentAddBinding
+import com.example.todo.fragments.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -72,6 +72,11 @@ class AddFragment : Fragment() {
                 .show()
 
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 
