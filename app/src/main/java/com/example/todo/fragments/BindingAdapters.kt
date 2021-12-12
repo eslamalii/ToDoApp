@@ -68,7 +68,7 @@ class BindingAdapters {
         @BindingAdapter("android:parseDate")
         @JvmStatic
         fun parseDate(view: TextView, date: Date) {
-            val simpleFormatter = SimpleDateFormat("EEE", Locale.ENGLISH)
+            val simpleFormatter = SimpleDateFormat("EEE d/m", Locale.ENGLISH)
             view.text = simpleFormatter.format(date)
         }
     }
