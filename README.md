@@ -4,3 +4,12 @@ A TodoList app that uses Room Database along with Coroutines to save todos. Dagg
 
 
 # Screenshots
+
+<img src="https://user-images.githubusercontent.com/13966657/145732526-60d202fd-fc80-4eb8-84d1-351853c3bfd9.png" width=40% height=40% > <img src="https://user-images.githubusercontent.com/13966657/145732528-db049e7c-62cf-4255-a8d4-c2735a4ce275.png" width=40% height=40% >
+<img src="https://user-images.githubusercontent.com/13966657/145732529-3d2beffd-7730-4a75-9dec-f276aecc96d3.png" width=40% height=40% >
+<img src="https://user-images.githubusercontent.com/13966657/145732530-580b5a09-881d-4434-a348-5c8489813076.png" width=40% height=40% >
+<img src="https://user-images.githubusercontent.com/13966657/145732531-5df80afb-3ee7-483b-b3d7-9bb35de4e89c.png" width=40% height=40% >
+<img src="https://user-images.githubusercontent.com/13966657/145732532-2811757b-5dc9-4875-a389-5d71c3a5810c.png" width=40% height=40% >
+
+
+
