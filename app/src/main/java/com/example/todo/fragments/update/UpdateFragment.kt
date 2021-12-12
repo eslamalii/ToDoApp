@@ -14,6 +14,7 @@ import com.example.todo.data.viewmodel.ToDoViewModel
 import com.example.todo.databinding.FragmentUpdateBinding
 import com.example.todo.fragments.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class UpdateFragment : Fragment() {
@@ -69,7 +70,8 @@ class UpdateFragment : Fragment() {
                 args.currentItem.id,
                 title,
                 description,
-                mSharedViewModel.parsePriority(getPriority)
+                mSharedViewModel.parsePriority(getPriority),
+                Calendar.getInstance().time
             )
             viewModel.updateData(updatedData)
             Toast.makeText(requireContext(), "Successful updated!", Toast.LENGTH_SHORT).show()

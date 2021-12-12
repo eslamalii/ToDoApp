@@ -1,6 +1,5 @@
 package com.example.todo.fragments.list
 
-import ObserveOnce
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -19,7 +18,8 @@ import com.example.todo.fragments.SharedViewModel
 import com.example.todo.fragments.list.adapter.ListAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import hideKeyboard
+import com.example.todo.util.hideKeyboard
+import com.example.todo.util.observeOnce
 
 @AndroidEntryPoint
 class ListFragment : Fragment(), SearchView.OnQueryTextListener {
@@ -134,7 +134,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun searchThoughDatabase(query: String) {
         val search = "%$query%"
 
-        viewModel.searchDatabase(search).ObserveOnce(viewLifecycleOwner, { list ->
+        viewModel.searchDatabase(search).observeOnce(viewLifecycleOwner, { list ->
             list?.let { adapter.setData(list) }
         })
     }

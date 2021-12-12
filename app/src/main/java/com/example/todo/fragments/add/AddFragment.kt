@@ -12,6 +12,10 @@ import com.example.todo.data.viewmodel.ToDoViewModel
 import com.example.todo.databinding.FragmentAddBinding
 import com.example.todo.fragments.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
+import java.util.logging.SimpleFormatter
 
 @AndroidEntryPoint
 class AddFragment : Fragment() {
@@ -61,7 +65,8 @@ class AddFragment : Fragment() {
                 0,
                 title,
                 description,
-                mSharedViewModel.parsePriority(priority)
+                mSharedViewModel.parsePriority(priority),
+                Calendar.getInstance().time
             )
             viewModel.insertData(data)
             Toast.makeText(requireContext(), "Successfully Added!", Toast.LENGTH_SHORT).show()

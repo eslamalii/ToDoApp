@@ -1,6 +1,7 @@
 package com.example.todo.fragments
 
 import android.view.View
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
@@ -11,6 +12,9 @@ import com.example.todo.data.models.Priority
 import com.example.todo.data.models.ToDoData
 import com.example.todo.fragments.list.ListFragmentDirections
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
 
 class BindingAdapters {
 
@@ -59,6 +63,13 @@ class BindingAdapters {
                 val action = ListFragmentDirections.actionListFragmentToUpdateFragment(toDoData)
                 view.findNavController().navigate(action)
             }
+        }
+
+        @BindingAdapter("android:parseDate")
+        @JvmStatic
+        fun parseDate(view: TextView, date: Date) {
+            val simpleFormatter = SimpleDateFormat("EEE", Locale.ENGLISH)
+            view.text = simpleFormatter.format(date)
         }
     }
 }

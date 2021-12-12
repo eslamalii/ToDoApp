@@ -18,6 +18,7 @@ class ToDoViewModel @Inject constructor(
     val getAllData: LiveData<List<ToDoData>> = repository.getAllData
     val sortByHigh: LiveData<List<ToDoData>> = repository.sortByHigh()
     val sortByLow: LiveData<List<ToDoData>> = repository.sortByLow()
+
     fun insertData(toDoData: ToDoData) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertData(toDoData)
