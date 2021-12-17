@@ -2,6 +2,7 @@ package com.example.todo.fragments.update
 
 import android.os.Bundle
 import android.view.*
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -34,11 +35,15 @@ class UpdateFragment : Fragment() {
         _binding = FragmentUpdateBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.currentTitleEt.setText(args.currentItem.title)
-        binding.currentDescriptionEt.setText(args.currentItem.description)
+        binding.note = args.currentItem
 
-        binding.currentSpinnerPriorities.setSelection(mSharedViewModel.parsePriorityToInt(args.currentItem.priority))
-        binding.currentSpinnerPriorities.onItemSelectedListener = mSharedViewModel.listener
+        binding.currentSpinnerPriorities.setAdapter(
+            ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                resources.getStringArray(R.array.priorities)
+            )
+        )
 
         //Set Menu
         setHasOptionsMenu(true)
@@ -62,7 +67,7 @@ class UpdateFragment : Fragment() {
     private fun updateItem() {
         val title = binding.currentTitleEt.text.toString()
         val description = binding.currentDescriptionEt.text.toString()
-        val getPriority = binding.currentSpinnerPriorities.selectedItem.toString()
+        val getPriority = binding.currentSpinnerPriorities.text.toString()
 
         val validation = mSharedViewModel.verifyDataFromUser(title, description)
         if (validation) {

@@ -2,7 +2,10 @@ package com.example.todo.fragments.add
 
 import android.os.Bundle
 import android.view.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,16 +15,14 @@ import com.example.todo.data.viewmodel.ToDoViewModel
 import com.example.todo.databinding.FragmentAddBinding
 import com.example.todo.fragments.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
-import java.util.logging.SimpleFormatter
 
 @AndroidEntryPoint
 class AddFragment : Fragment() {
 
     private val viewModel: ToDoViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
+
 
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
@@ -35,7 +36,44 @@ class AddFragment : Fragment() {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.spinnerPriorities.onItemSelectedListener = mSharedViewModel.listener
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            resources.getStringArray(R.array.priorities)
+        )
+
+        binding.spinnerPriorities.setAdapter(adapter)
+
+        binding.spinnerPriorities.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                when (position) {
+                    0 -> {
+                        binding.spinnerPriorities.setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.red
+                            )
+                        )
+                    }
+                    1 -> {
+                        binding.spinnerPriorities.setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.yellow
+                            )
+                        )
+                    }
+                    2 -> {
+                        binding.spinnerPriorities.setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.green
+                            )
+                        )
+                    }
+                }
+            }
+
 
         //Set Menu
         setHasOptionsMenu(true)
@@ -56,7 +94,7 @@ class AddFragment : Fragment() {
 
     private fun insertDataToDo() {
         val title = binding.titleEt.text.toString()
-        val priority = binding.spinnerPriorities.selectedItem.toString()
+        val priority = binding.spinnerPriorities.text.toString()
         val description = binding.descriptionEt.text.toString()
 
         val validation = mSharedViewModel.verifyDataFromUser(title, description)

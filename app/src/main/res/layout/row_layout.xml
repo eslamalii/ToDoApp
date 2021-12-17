@@ -45,6 +45,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:maxLength="30"
                 android:text="@{toDoData.title}"
                 android:textColor="@color/darkGray"
                 android:textSize="20sp"
@@ -88,14 +89,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha="0.8"
-                    android:text="@string/last_updated" />
+                    android:text="@string/last_updated"
+                    android:textSize="12sp" />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:alpha="0.8"
                     android:gravity="end"
-                    android:parseDate="@{toDoData.date}" />
+                    android:parseDate="@{toDoData.date}"
+                    android:textSize="12sp" />
             </LinearLayout>
 
 

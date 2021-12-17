@@ -14,6 +14,7 @@
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="last_updated">Last updated</string>
+    <string name="select_priority">Select Priority</string>
 
 
     <string-array name="priorities">

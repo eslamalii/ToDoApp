@@ -1,9 +1,12 @@
 package com.example.todo.fragments
 
 import android.view.View
+import android.widget.AdapterView
+import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
@@ -13,12 +16,13 @@ import com.example.todo.data.models.ToDoData
 import com.example.todo.fragments.list.ListFragmentDirections
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
 
 class BindingAdapters {
 
     companion object {
+
+        private val prioritiesList = listOf("High Priority", "Medium Priority", "Low Priority")
 
         @BindingAdapter("android:navigateToAddFragment")
         @JvmStatic
@@ -68,8 +72,89 @@ class BindingAdapters {
         @BindingAdapter("android:parseDate")
         @JvmStatic
         fun parseDate(view: TextView, date: Date) {
-            val simpleFormatter = SimpleDateFormat("EEE d/m", Locale.ENGLISH)
+            val simpleFormatter = SimpleDateFormat("EEE dd/MM", Locale.ENGLISH)
             view.text = simpleFormatter.format(date)
         }
+
+
+        @BindingAdapter("onItemClick")
+        @JvmStatic
+        fun onItemClick(textView: AutoCompleteTextView, note: ToDoData) {
+            textView.onItemClickListener =
+                AdapterView.OnItemClickListener { _, _, position, _ ->
+
+                    when (position) {
+                        0 -> {
+                            textView.setTextColor(
+                                ContextCompat.getColor(
+                                    textView.context,
+                                    R.color.red
+                                )
+                            )
+                            note.priority = Priority.HIGH
+                        }
+                        1 -> {
+                            textView.setTextColor(
+                                ContextCompat.getColor(
+                                    textView.context,
+                                    R.color.yellow
+                                )
+                            )
+                            note.priority = Priority.MEDIUM
+
+                        }
+                        2 -> {
+                            textView.setTextColor(
+                                ContextCompat.getColor(
+                                    textView.context,
+                                    R.color.green
+                                )
+                            )
+                            note.priority = Priority.LOW
+                        }
+                    }
+                }
+        }
+
+
+        @BindingAdapter("setAppropriateText")
+        @JvmStatic
+        fun setAppropriateText(textView: AutoCompleteTextView, priorityModel: Priority) {
+            when (priorityModel) {
+                Priority.HIGH -> {
+                    textView.setTextColor(
+                        ContextCompat.getColor(
+                            textView.context,
+                            R.color.red
+                        )
+                    )
+                    textView.setText(prioritiesList[0], false)
+                }
+
+                Priority.MEDIUM -> {
+                    textView.setTextColor(
+                        ContextCompat.getColor(
+                            textView.context,
+                            R.color.yellow
+                        )
+                    )
+
+                    textView.setText(prioritiesList[1], false)
+                }
+                Priority.LOW -> {
+                    textView.setTextColor(
+                        ContextCompat.getColor(
+                            textView.context,
+                            R.color.green
+                        )
+                    )
+
+                    textView.setText(prioritiesList[2], false)
+                }
+
+            }
+
+        }
     }
+
 }
