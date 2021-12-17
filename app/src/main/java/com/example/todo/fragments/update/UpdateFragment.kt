@@ -81,7 +81,7 @@ class UpdateFragment : Fragment() {
             viewModel.updateData(updatedData)
             Toast.makeText(requireContext(), "Successful updated!", Toast.LENGTH_SHORT).show()
             //Navigate Back
-            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+            findNavController().popBackStack()
         } else {
             Toast.makeText(requireContext(), "Please fill out all fields", Toast.LENGTH_SHORT)
                 .show()

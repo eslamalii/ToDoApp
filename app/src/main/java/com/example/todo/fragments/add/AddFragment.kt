@@ -109,7 +109,7 @@ class AddFragment : Fragment() {
             viewModel.insertData(data)
             Toast.makeText(requireContext(), "Successfully Added!", Toast.LENGTH_SHORT).show()
 
-            findNavController().navigate(R.id.action_addFragment_to_listFragment)
+            findNavController().popBackStack()
         } else
             Toast.makeText(requireContext(), "Please fill out all fields", Toast.LENGTH_SHORT)
                 .show()
