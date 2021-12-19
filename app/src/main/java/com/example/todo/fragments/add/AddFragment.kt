@@ -23,7 +23,6 @@ class AddFragment : Fragment() {
     private val viewModel: ToDoViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
 
-
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
 
@@ -73,7 +72,6 @@ class AddFragment : Fragment() {
                     }
                 }
             }
-
 
         //Set Menu
         setHasOptionsMenu(true)

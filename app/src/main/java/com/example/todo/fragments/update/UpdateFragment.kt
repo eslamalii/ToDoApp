@@ -63,7 +63,6 @@ class UpdateFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-
     private fun updateItem() {
         val title = binding.currentTitleEt.text.toString()
         val description = binding.currentDescriptionEt.text.toString()
